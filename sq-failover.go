@@ -26,9 +26,9 @@ func main(){
         }
         defer logFile.Close()
         log.SetOutput(logFile)
-        host1 := "172.18.55.218"
-        host2 := "172.18.55.219"
-        host3 := "172.19.46.167"
+        host1 := "172.18.55.216"
+        host2 := "172.18.55.217"
+        host3 := "172.19.46.168"
         // host3 := "172.19.46.167"
         port := "9000"
         var faill int = 0
