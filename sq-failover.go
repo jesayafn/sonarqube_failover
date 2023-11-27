@@ -28,16 +28,17 @@ func main() {
 	log.SetOutput(logFile)
 	host1 := os.Getenv("HOST1")
 	host2 := os.Getenv("HOST2")
-	host3 := os.Getenv("HOST3")
+	// host3 := os.Getenv("HOST3")
 	port := "9000"
 	var faill int = 0
 
 	for {
 		var check1 bool = checkport(host1, port)
 		var check2 bool = checkport(host2, port)
-		var check3 bool = checkport(host3, port)
+		// var check3 bool = checkport(host3, port)
 		currentTime := time.Now().Format("01-02-2006 15:04:05")
-		if check1 == true || check2 == true || check3 == true {
+		// if check1 == true || check2 == true || check3 == true {
+		if check1 == true || check2 == true {
 			fmt.Println("[" + currentTime + "] [INFO] No need Failover")
 			log.Println("[INFO] No need Failover")
 			faill = 0
