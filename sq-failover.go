@@ -6,15 +6,18 @@ import (
 	"net"
 	"os"
 	"os/exec"
+	"strconv"
 	"time"
 )
 
-const (
-	interval = 60
-	failinit = 20
+var (
+	interval int
+	failinit int
 )
 
 func main() {
+	interval, _ = strconv.Atoi(os.Getenv("INTERVAL"))
+	failinit, _ = strconv.Atoi(os.Getenv("FAILINIT"))
 	path, err := os.Getwd()
 	if err != nil {
 		fmt.Println(err)
@@ -37,6 +40,7 @@ func main() {
 		var check2 bool = checkport(host2, port)
 		var check3 bool = checkport(host3, port)
 		currentTime := time.Now().Format("01-02-2006 15:04:05")
+		// if check1 == true || check2 == true || check3 == true {
 		if check1 == true || check2 == true || check3 == true {
 			fmt.Println("[" + currentTime + "] [INFO] No need Failover")
 			log.Println("[INFO] No need Failover")
@@ -52,7 +56,7 @@ func main() {
 				break
 			}
 		}
-		time.Sleep(interval * time.Second)
+		time.Sleep(time.Duration(interval) * time.Second)
 	}
 }
 
