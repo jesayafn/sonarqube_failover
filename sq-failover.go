@@ -6,15 +6,18 @@ import (
 	"net"
 	"os"
 	"os/exec"
+	"strconv"
 	"time"
 )
 
-const (
-	interval = 60
-	failinit = 20
+var (
+	interval int
+	failinit int
 )
 
 func main() {
+	interval, _ = strconv.Atoi(os.Getenv("INTERVAL"))
+	failinit, _ = strconv.Atoi(os.Getenv("FAILINIT"))
 	path, err := os.Getwd()
 	if err != nil {
 		fmt.Println(err)
@@ -53,7 +56,7 @@ func main() {
 				break
 			}
 		}
-		time.Sleep(interval * time.Second)
+		time.Sleep(time.Duration(interval) * time.Second)
 	}
 }
 
